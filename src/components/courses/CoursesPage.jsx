@@ -13,8 +13,6 @@ const CoursesPage = (props) => {
   const [redirectToAddCoursePage, setRedirectToAddCoursePage] = useState(false)
 
   useEffect(() => {
-    console.log('useEffect()')
-
     const { courses, authors, actions } = props
 
     if (courses.length === 0) {
