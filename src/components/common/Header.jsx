@@ -17,8 +17,8 @@ const Header = () => {
         About
       </NavLink>
       {' | '}
-      <NavLink to="/Workshop" activeStyle={activeStyle}>
-        Workshop Oscar
+      <NavLink to="/workshop" activeStyle={activeStyle}>
+        Workshop
       </NavLink>
     </nav>
   )
