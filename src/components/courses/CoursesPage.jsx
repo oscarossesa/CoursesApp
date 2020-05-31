@@ -25,7 +25,6 @@ const CoursesPage = () => {
             ...course,
             authorName: authors.find((a) => a.id === course.authorId).name,
           }
-          console.log('bb', bb)
         })
   )
 
