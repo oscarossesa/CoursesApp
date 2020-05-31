@@ -19,6 +19,8 @@ export function deleteCourseOptimistic(course) {
 }
 
 export function loadCourses() {
+  // console.log('courseActions.js --> loadCourses()')
+
   return function (dispatch) {
     dispatch(beginApiCall())
     return courseApi

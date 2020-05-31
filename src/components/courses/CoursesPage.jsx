@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
 import * as courseActions from '../../redux/actions/courseActions'
 import * as authorActions from '../../redux/actions/authorActions'
 import PropTypes from 'prop-types'
@@ -8,21 +8,36 @@ import CourseList from './CourseList'
 import { Redirect } from 'react-router-dom'
 import Spinner from '../common/Spinner'
 import { toast } from 'react-toastify'
+import { createSelector } from 'reselect'
 
-const CoursesPage = (props) => {
+const CoursesPage = () => {
   const [redirectToAddCoursePage, setRedirectToAddCoursePage] = useState(false)
 
-  useEffect(() => {
-    const { courses, authors, actions } = props
+  const dispatch = useDispatch()
 
+  const loading = useSelector((state) => state.apiCallsInProgress > 0)
+  const authors = useSelector((state) => state.authors)
+  const courses = useSelector((state) =>
+    authors.length === 0
+      ? []
+      : state.courses.map((course) => {
+          return {
+            ...course,
+            authorName: authors.find((a) => a.id === course.authorId).name,
+          }
+          console.log('bb', bb)
+        })
+  )
+
+  useEffect(() => {
     if (courses.length === 0) {
-      actions.loadCourses().catch((error) => {
+      dispatch(courseActions.loadCourses()).catch((error) => {
         alert('Loading courses failed' + error)
       })
     }
 
     if (authors.length === 0) {
-      actions.loadAuthors().catch((error) => {
+      dispatch(authorActions.loadAuthors()).catch((error) => {
         alert('Loading authors failed' + error)
       })
     }
@@ -31,7 +46,7 @@ const CoursesPage = (props) => {
   const handleDeleteCourse = async (course) => {
     toast.success('Course deleted')
     try {
-      await props.actions.deleteCourse(course)
+      await dispatch(courseActions.deleteCourse(course))
     } catch (error) {
       toast.error('Delete failed. ' + error.message, { autoClose: false })
     }
@@ -41,7 +56,7 @@ const CoursesPage = (props) => {
     <>
       {redirectToAddCoursePage && <Redirect to="/course" />}
       <h2>Courses</h2>
-      {props.loading ? (
+      {loading ? (
         <Spinner />
       ) : (
         <>
@@ -53,10 +68,7 @@ const CoursesPage = (props) => {
             Add Course
           </button>
 
-          <CourseList
-            onDeleteClick={handleDeleteCourse}
-            courses={props.courses}
-          />
+          <CourseList onDeleteClick={handleDeleteCourse} courses={courses} />
         </>
       )}
     </>
@@ -70,31 +82,4 @@ CoursesPage.propTypes = {
   loading: PropTypes.bool.isRequired,
 }
 
-function mapStateToProps(state) {
-  return {
-    courses:
-      state.authors.length === 0
-        ? []
-        : state.courses.map((course) => {
-            return {
-              ...course,
-              authorName: state.authors.find((a) => a.id === course.authorId)
-                .name,
-            }
-          }),
-    authors: state.authors,
-    loading: state.apiCallsInProgress > 0,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
-      loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
-      deleteCourse: bindActionCreators(courseActions.deleteCourse, dispatch),
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage)
+export default CoursesPage
