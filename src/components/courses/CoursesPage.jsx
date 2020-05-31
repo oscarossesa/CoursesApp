@@ -75,11 +75,4 @@ const CoursesPage = () => {
   )
 }
 
-CoursesPage.propTypes = {
-  authors: PropTypes.array.isRequired,
-  courses: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
-}
-
 export default CoursesPage
