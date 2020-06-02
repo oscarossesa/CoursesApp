@@ -11,6 +11,7 @@ const UseEffectHook = () => {
 
   return (
     <div style={{ border: 'solid 6px green' }}>
+      <b>Componente funcional</b> (UseEffectHook.jsx)
       <p>Tu has hecho click {count} veces</p>
       <button onClick={() => setCount(count + 1)}>Clickeame</button>
     </div>

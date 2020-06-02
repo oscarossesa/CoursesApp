@@ -18,6 +18,7 @@ class ClassUseEffect extends React.Component {
   render() {
     return (
       <div style={{ border: 'solid 6px orange' }}>
+        <b>Componente de clase</b> (ClassUseEffect.jsx)
         <p>Tu has hecho click {this.state.count} veces</p>
         <button onClick={() => this.setState({ count: this.state.count + 1 })}>
           Clickeame

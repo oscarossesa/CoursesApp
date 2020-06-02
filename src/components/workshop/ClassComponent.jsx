@@ -26,16 +26,6 @@ class ClassComponent extends Component {
     return (
       <div style={this.state.style}>
         <b>{this.props.name}</b> (ClassComponent.jsx)
-        <ul>
-          <li>
-            No me deberían ocupar a menos que el componente ya este hecho como
-            clase y no pueda migrarlo.
-          </li>
-          <li>
-            Cada cambio tanto en props como en estado llaman al método render.
-          </li>
-          <li></li>
-        </ul>
       </div>
     )
   }

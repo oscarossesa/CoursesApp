@@ -7,7 +7,7 @@ import ClassUseState from './hooks/useState/ClassUseState'
 import UseEffectHook from './hooks/useEffect/UseEffectHook'
 import ClassUseEffect from './hooks/useEffect/ClassUseEffect'
 
-const Workshop = () => {
+const WorkshopContainer = () => {
   return (
     <>
       <hr />
@@ -81,8 +81,9 @@ const Workshop = () => {
           <ClassUseEffect />
         </div>
       </div>
+      <div className="mt-5"></div>
     </>
   )
 }
 
-export default Workshop
+export default WorkshopContainer
