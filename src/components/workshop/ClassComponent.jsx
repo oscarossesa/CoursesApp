@@ -20,13 +20,12 @@ class ClassComponent extends Component {
         border: 'solid 6px green',
       },
     }
-    console.log(this.state)
   }
 
   render() {
     return (
       <div style={this.state.style}>
-        Soy un ejemplo de <b>{this.props.name}</b>.
+        <b>{this.props.name}</b> (ClassComponent.jsx)
         <ul>
           <li>
             No me deberían ocupar a menos que el componente ya este hecho como

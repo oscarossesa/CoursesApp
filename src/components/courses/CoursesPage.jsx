@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { connect, useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import * as courseActions from '../../redux/actions/courseActions'
 import * as authorActions from '../../redux/actions/authorActions'
-import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
 import CourseList from './CourseList'
 import { Redirect } from 'react-router-dom'
 import Spinner from '../common/Spinner'
 import { toast } from 'react-toastify'
-import { createSelector } from 'reselect'
 
 const CoursesPage = () => {
   const [redirectToAddCoursePage, setRedirectToAddCoursePage] = useState(false)
